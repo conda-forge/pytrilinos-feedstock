@@ -14,8 +14,8 @@ source:
     - 12.10-fixes.patch
 
 build:
-  number: 0
-  skip: true  # [win or py3k]
+  number: 1
+  skip: true  # [py3k]
 
 requirements:
   build:
