@@ -50,7 +50,6 @@ cmake \
   $SRC_DIR
 
 make -j $CPU_COUNT
-
+$PYTHON packages/PyTrilinos/util/configFix.py
 ctest --output-on-failure
-
 make install
