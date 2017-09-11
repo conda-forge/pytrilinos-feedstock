@@ -14,8 +14,8 @@ source:
     - 12.10-fixes.patch
 
 build:
-  number: 0
-  skip: true  # [win or py3k]
+  number: 1
+  skip: true  # [py3k]
 
 requirements:
   build:
@@ -25,12 +25,12 @@ requirements:
     - python
     - swig 3.0.10
     - doxygen
-    - numpy 1.7.*
+    - numpy 1.9.*
 
   run:
     - openmpi
     - python
-    - numpy >=1.7
+    - numpy >=1.9
 
 test:
   imports:
