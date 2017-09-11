@@ -25,12 +25,12 @@ requirements:
     - python
     - swig 3.0.10
     - doxygen
-    - numpy 1.7.*
+    - numpy 1.9.*
 
   run:
     - openmpi
     - python
-    - numpy >=1.7
+    - numpy >=1.9
 
 test:
   imports:
