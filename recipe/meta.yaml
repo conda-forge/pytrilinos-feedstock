@@ -34,19 +34,19 @@ requirements:
 
 test:
   imports:
-    - PyTrilinos.Teuchos
-    - PyTrilinos.Epetra
-    - PyTrilinos.TriUtils
-    - PyTrilinos.Tpetra
-    - PyTrilinos.EpetraExt
-    - PyTrilinos.Domi
-    - PyTrilinos.AztecOO
-    - PyTrilinos.Galeri
-    - PyTrilinos.Amesos
-    - PyTrilinos.IFPACK
-    - PyTrilinos.Komplex
-    - PyTrilinos.ML
-    - PyTrilinos.Anasazi
+    - PyTrilinos.Teuchos    # [osx]
+    - PyTrilinos.Epetra     # [osx]
+    - PyTrilinos.TriUtils   # [osx]
+    - PyTrilinos.Tpetra     # [osx]
+    - PyTrilinos.EpetraExt  # [osx]
+    - PyTrilinos.Domi       # [osx]
+    - PyTrilinos.AztecOO    # [osx]
+    - PyTrilinos.Galeri     # [osx]
+    - PyTrilinos.Amesos     # [osx]
+    - PyTrilinos.IFPACK     # [osx]
+    - PyTrilinos.Komplex    # [osx]
+    - PyTrilinos.ML         # [osx]
+    - PyTrilinos.Anasazi    # [osx]
 
 about:
   home: https://trilinos.org
