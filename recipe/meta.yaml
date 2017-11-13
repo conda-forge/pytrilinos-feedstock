@@ -19,6 +19,7 @@ build:
 
 requirements:
   build:
+    - trilinos {{ version }}
     - cmake >=2.8.11
     - toolchain
     - openmpi
