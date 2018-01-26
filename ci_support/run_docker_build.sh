@@ -76,4 +76,4 @@ EOF
 # see https://github.com/conda-forge/conda-smithy/pull/337
 # for a possible fix
 set -x
-test -f "$FEEDSTOCK_ROOT/build_artefacts/conda-forge-build-done" || exit 1
+#test -f "$FEEDSTOCK_ROOT/build_artefacts/conda-forge-build-done" || exit 1
