@@ -33,6 +33,8 @@ requirements:
     - numpy >=1.7
 
 test:
+  requires:
+    - cmake >=2.8.11
   imports:
     - PyTrilinos.Teuchos
     - PyTrilinos.Epetra
