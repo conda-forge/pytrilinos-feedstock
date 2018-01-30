@@ -20,22 +20,25 @@ build:
 
 requirements:
   build:
-    - cmake >=2.8.11
+    - cmake 3.9.6
     - toolchain
     - {{ mpi }}
     - python
     - swig 3.0.10
     - doxygen
     - numpy 1.7.*
+    - mpi4py
 
   run:
     - {{ mpi }}
+    - mpi4py
     - python
     - numpy >=1.7
 
 test:
   requires:
-    - cmake >=2.8.11
+    - cmake 3.9.6
+    - mpi4py
   imports:
     - PyTrilinos.Teuchos
     - PyTrilinos.Epetra
