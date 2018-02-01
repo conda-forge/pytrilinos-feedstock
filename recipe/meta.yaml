@@ -1,6 +1,7 @@
 {% set name = "PyTrilinos" %}
 {% set version = "12.10.1" %}
 {% set sha256 = "ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06" %}
+{% set mpi = 'mpich 3.2.*' %}
 
 package:
   name: {{ name|lower }}
@@ -14,25 +15,30 @@ source:
     - 12.10-fixes.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or py3k]
 
 requirements:
   build:
-    - cmake >=2.8.11
+    - cmake 3.9.6
     - toolchain
-    - openmpi
+    - {{ mpi }}
     - python
     - swig 3.0.10
     - doxygen
     - numpy 1.7.*
+    - mpi4py
 
   run:
-    - openmpi
+    - {{ mpi }}
+    - mpi4py
     - python
     - numpy >=1.7
 
 test:
+  requires:
+    - cmake 3.9.6
+    - mpi4py
   imports:
     - PyTrilinos.Teuchos
     - PyTrilinos.Epetra

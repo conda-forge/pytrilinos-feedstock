@@ -5,11 +5,10 @@ if [ $(uname) == Darwin ]; then
     export CXXFLAGS="-stdlib=libc++"
 fi
 
-export MPI_FLAGS=--allow-run-as-root
-
-if [ $(uname) == Linux ]; then
-    export MPI_FLAGS="$MPI_FLAGS;-mca;plm;isolated"
-fi
+export HYDRA_LAUNCHER=fork
+export OMPI_MCA_plm=isolated
+export OMPI_MCA_btl_vader_single_copy_mechanism=none
+export OMPI_MCA_rmaps_base_oversubscribe=yes
 
 cmake \
   -D CMAKE_BUILD_TYPE:STRING=RELEASE \
