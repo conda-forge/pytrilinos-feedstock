@@ -1,3 +1,4 @@
+set +e
 mkdir -p build
 cd build
 
@@ -50,7 +51,7 @@ cmake \
   $SRC_DIR
 
 make -j $CPU_COUNT
-
+make install
+set -e
 ctest --output-on-failure
 
-make install
