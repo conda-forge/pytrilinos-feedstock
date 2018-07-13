@@ -20,9 +20,9 @@ build:
 
 requirements:
   build:
+    - python 2.7
     - trilinos {{ version }}
     - cmake 3.9.6
-    - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
