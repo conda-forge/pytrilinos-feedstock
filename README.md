@@ -14,8 +14,7 @@ Python interfaces to fast, compiled object-oriented algorithms and enabling tech
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/pytrilinos-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/pytrilinos-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/pytrilinos-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/pytrilinos-feedstock)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/pytrilinos-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/pytrilinos-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
