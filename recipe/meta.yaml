@@ -33,6 +33,7 @@ requirements:
     - mpi4py
 
   run:
+    - trilinos {{ version }}
     - {{ mpi }}
     - mpi4py
     - python
