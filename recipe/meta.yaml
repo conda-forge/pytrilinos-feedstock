@@ -20,7 +20,7 @@ build:
 
 requirements:
   build:
-    - cmake 3.9.6
+    - cmake >=2.8.11
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -41,7 +41,6 @@ requirements:
 
 test:
   requires:
-    - cmake 3.9.6
     - mpi4py
   imports:
     - PyTrilinos.Teuchos
