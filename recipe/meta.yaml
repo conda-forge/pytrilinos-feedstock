@@ -1,38 +1,35 @@
-{% set name = "PyTrilinos" %}
 {% set version = "12.10.1" %}
-{% set sha256 = "ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06" %}
-{% set mpi = 'mpich 3.2.*' %}
 
 package:
-  name: {{ name|lower }}
+  name: pytrilinos
   version: {{ version }}
 
 source:
-  fn: trilinos-{{ version }}-Source.tar.gz
   url: http://trilinos.csbsju.edu/download/files/trilinos-{{ version }}-Source.tar.gz
-  sha256: {{ sha256 }}
+  sha256: ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06
   patches:
     - 12.10-fixes.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win or py3k]
 
 requirements:
   build:
-    - cmake 3.9.6
-    - {{ compiler('fortran') }}
+    - cmake >=2.8.11
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
     - {{ mpi }}
-    - python
+    - python 2.7
+    - trilinos {{ version }}
     - swig 3.0.10
     - doxygen
     - numpy
     - mpi4py
 
   run:
+    - trilinos {{ version }}
     - {{ mpi }}
     - mpi4py
     - python
@@ -40,7 +37,6 @@ requirements:
 
 test:
   requires:
-    - cmake 3.9.6
     - mpi4py
   imports:
     - PyTrilinos.Teuchos

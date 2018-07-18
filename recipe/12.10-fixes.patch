@@ -11,6 +11,18 @@ diff -Naur 12.10/packages/PyTrilinos/cmake/PyTrilinosMakeTest.cmake 12.12/packag
              ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_NAME}.py.in
  	    ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.py
      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_NAME}.py.in)
+diff -Naur 12.10/packages/PyTrilinos/cmake/PyTrilinos_config.h.in 12.12/packages/PyTrilinos/cmake/PyTrilinos_config.h.in
+--- 12.10/packages/PyTrilinos/cmake/PyTrilinos_config.h.in	2018-07-18 13:37:54.000000000 -0600
++++ 12.12/packages/PyTrilinos/cmake/PyTrilinos_config.h.in	2018-07-18 13:39:08.000000000 -0600
+@@ -78,7 +78,7 @@
+ #cmakedefine HAVE_MPI4PY
+ 
+ /* Define if want to build PyTrilinos */
+-#cmakedefine HAVE_PYTRILINOS
++#define HAVE_PYTRILINOS
+ 
+ /* Define if want to build with Amesos enabled */
+ #cmakedefine HAVE_PYTRILINOS_AMESOS
 diff -Naur 12.10/packages/PyTrilinos/example/CMakeLists.txt 12.12/packages/PyTrilinos/example/CMakeLists.txt
 --- 12.10/packages/PyTrilinos/example/CMakeLists.txt	2017-07-24 14:05:24.000000000 -0600
 +++ 12.12/packages/PyTrilinos/example/CMakeLists.txt	2017-07-24 14:03:46.000000000 -0600
@@ -230,3 +242,94 @@ diff -Naur 12.10/packages/PyTrilinos/test/CMakeLists.txt 12.12/packages/PyTrilin
            ${CMAKE_CURRENT_SOURCE_DIR}/testutil.py.in
  	  ${CMAKE_CURRENT_BINARY_DIR}/testutil.py
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/testutil.py.in)
+diff -Naur 12.10/packages/PyTrilinos/util/CMakeLists.txt 12.12/packages/PyTrilinos/util/CMakeLists.txt
+--- 12.10/packages/PyTrilinos/util/CMakeLists.txt	2017-09-09 08:58:05.000000000 -0600
++++ 12.12/packages/PyTrilinos/util/CMakeLists.txt	2017-09-29 13:37:59.000000000 -0600
+@@ -53,3 +53,7 @@
+ # Generate the copyWithCMakeSubstitutions python script
+ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/copyWithCMakeSubstitutions.py.in
+   ${CMAKE_CURRENT_BINARY_DIR}/copyWithCMakeSubstitutions.py)
++
++# Generate the configFix python script
++CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/configFix.py.in
++  ${CMAKE_CURRENT_BINARY_DIR}/configFix.py)
+diff -Naur 12.10/packages/PyTrilinos/util/configFix.py.in 12.12/packages/PyTrilinos/util/configFix.py.in
+--- 12.10/packages/PyTrilinos/util/configFix.py.in	1969-12-31 17:00:00.000000000 -0700
++++ 12.12/packages/PyTrilinos/util/configFix.py.in	2017-09-09 08:54:45.000000000 -0600
+@@ -0,0 +1,76 @@
++#! ${PYTHON_EXECUTABLE}
++
++# @HEADER
++# ***********************************************************************
++#
++#          PyTrilinos: Python Interfaces to Trilinos Packages
++#                 Copyright (2014) Sandia Corporation
++#
++# Under the terms of Contract DE-AC04-94AL85000 with Sandia
++# Corporation, the U.S. Government retains certain rights in this
++# software.
++#
++# Redistribution and use in source and binary forms, with or without
++# modification, are permitted provided that the following conditions are
++# met:
++#
++# 1. Redistributions of source code must retain the above copyright
++# notice, this list of conditions and the following disclaimer.
++#
++# 2. Redistributions in binary form must reproduce the above copyright
++# notice, this list of conditions and the following disclaimer in the
++# documentation and/or other materials provided with the distribution.
++#
++# 3. Neither the name of the Corporation nor the names of the
++# contributors may be used to endorse or promote products derived from
++# this software without specific prior written permission.
++#
++# THIS SOFTWARE IS PROVIDED BY SANDIA CORPORATION "AS IS" AND ANY
++# EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SANDIA CORPORATION OR THE
++# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++#
++# Questions? Contact William F. Spotz (wfspotz@sandia.gov)
++#
++# ***********************************************************************
++# @HEADER
++
++"""
++configFix.py - This script will fix the file TrilinosConfig_install.cmake,
++located in the root of the build directory. The fix is to remove references to
++pytrilinos and PyTrilinos, so that projects that use this file to determine what
++to link against will not link against Python-dependent libraries.
++"""
++
++__version__ = "1.0"
++__author__  = "Bill Spotz"
++__date__    = "Sep 9 2017"
++
++# Import python modules
++import os
++import sys
++
++# Determine the name of the configuration file to be fixed
++thisDir   = os.path.split(os.path.abspath(__file__))[0]
++buildPath = os.path.abspath(os.path.join(thisDir,"..","..",".."))
++filename  = os.path.join(buildPath, "TrilinosConfig_install.cmake")
++
++# Fix the config file
++if os.path.isfile(filename):
++    backup = filename + ".bak"
++    backupFile = open(backup, "w")
++    for line in open(filename, "r"):
++        out = line.replace("pytrilinos;", "")
++        backupFile.write(out.replace("PyTrilinos;", ""))
++    backupFile.close()
++    os.rename(backup, filename)
++    print("File '%s' fixed" % filename)
++else:
++    print("File '%s' not found" % filename)
