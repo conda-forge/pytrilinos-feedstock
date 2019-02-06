@@ -10,11 +10,8 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_mpimpichpython2.7:
-        CONFIG: linux_mpimpichpython2.7
-        UPLOAD_PACKAGES: False
-      linux_mpiopenmpipython2.7:
-        CONFIG: linux_mpiopenmpipython2.7
+      linux_python2.7:
+        CONFIG: linux_python2.7
         UPLOAD_PACKAGES: False
   steps:
   - script: |
