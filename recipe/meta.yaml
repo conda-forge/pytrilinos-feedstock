@@ -20,7 +20,7 @@ build:
 
 requirements:
   build:
-    - cmake 3.9.6
+    - cmake
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -40,7 +40,7 @@ requirements:
 
 test:
   requires:
-    - cmake 3.9.6
+    - cmake
     - mpi4py
   imports:
     - PyTrilinos.Teuchos
