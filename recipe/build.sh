@@ -1,10 +1,6 @@
 mkdir -p build
 cd build
 
-if [ $(uname) == Darwin ]; then
-    export CXXFLAGS="-stdlib=libc++"
-fi
-
 export HYDRA_LAUNCHER=fork
 export OMPI_MCA_plm=isolated
 export OMPI_MCA_btl_vader_single_copy_mechanism=none
