@@ -9,7 +9,7 @@ package:
 
 source:
   fn: trilinos-release-{{ version }}.tar.gz
-  url: http://github.com/trilinos/Trilinos/archive/trilinos-{{ version }}.tar.gz
+  url: http://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
@@ -29,6 +29,7 @@ requirements:
     - doxygen
     - numpy
     - mpi4py
+    - trilinos {{ version }}
 
   run:
     - mpi
