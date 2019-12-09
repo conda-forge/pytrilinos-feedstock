@@ -15,7 +15,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
+  skip: true  # [win and linux and py>=3]
 
 requirements:
   build:
@@ -26,7 +26,7 @@ requirements:
   host:
     - mpi
     - python
-    - swig >=3.0.10,<=3.0.12
+    - swig 3.0.10
     - doxygen
     - numpy
     - mpi4py
