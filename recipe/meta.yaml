@@ -15,7 +15,9 @@ source:
 
 build:
   number: 0
-  skip: true  # [win and linux and py>=3]
+  skip: true  # [win]
+  skip: true  # [linux]
+  skip: true  # [py>=3]
 
 requirements:
   build:
