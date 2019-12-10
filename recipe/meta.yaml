@@ -17,7 +17,7 @@ build:
   number: 0
   skip: true  # [win]
   skip: true  # [linux]
-  skip: true  # [py>=3]
+  skip: true  # [py3k]
 
 requirements:
   build:
