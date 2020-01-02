@@ -1,0 +1,199 @@
+From 75e5c29235703c11c24cb7e97029b9f6aa8e2c42 Mon Sep 17 00:00:00 2001
+From: Pyt Viper <viperpyt@gmail.com>
+Date: Tue, 24 Dec 2019 10:59:27 -0700
+Subject: [PATCH 1/3] PyTrilinos: Get Teuchos.RCP.i to process correctly
+
+Fixes: #6498
+
+PyTrilinos_Teuchos_Headers.hpp is updated to include
+"Teuchos_ParameterListModifier.hpp"
+
+Teuchos_ParameterList.i is modified to wrap the
+Teuchos::ParameterListModifier class, for the new
+Teuchos::ParameterList constructors.
+
+gen_teuchos_rcp.py.in is modified to %import TeuchosCore_config.h, so
+that the resulting Teuchos.RCP.i file is aware of the
+TPETRA_DEPRECATED macro
+---
+ .../PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp |  1 +
+ packages/PyTrilinos/src/Teuchos_ParameterList.i   | 15 ++++++++++++++-
+ packages/PyTrilinos/src/gen_teuchos_rcp.py.in     | 12 ++++--------
+ 3 files changed, 19 insertions(+), 9 deletions(-)
+
+diff --git a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp b/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
+index f6962159225..4a2f70b4d5e 100644
+--- a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
++++ b/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
+@@ -78,6 +78,7 @@
+ #include "Teuchos_ParameterList.hpp"
+ #include "Teuchos_ParameterListAcceptor.hpp"
+ #include "Teuchos_ParameterListExceptions.hpp"
++#include "Teuchos_ParameterListModifier.hpp"
+ #include "Teuchos_RCP.hpp"
+ #include "Teuchos_RCPDecl.hpp"
+ #include "Teuchos_ReductionOp.hpp"
+diff --git a/packages/PyTrilinos/src/Teuchos_ParameterList.i b/packages/PyTrilinos/src/Teuchos_ParameterList.i
+index 486b7186b2d..de47cfc75b2 100644
+--- a/packages/PyTrilinos/src/Teuchos_ParameterList.i
++++ b/packages/PyTrilinos/src/Teuchos_ParameterList.i
+@@ -933,6 +933,12 @@ Teuchos::ParameterList::values
+   }
+ }    // %extend ParameterList
+ 
++%{
++  using Teuchos::Array;
++  using Teuchos::null;
++  using Teuchos::ParameterListModifier;
++%}
++
+ %ignore Teuchos::ParameterList::set;
+ %ignore Teuchos::ParameterList::setEntry;
+ %ignore Teuchos::ParameterList::get;
+@@ -948,7 +954,7 @@ Teuchos::ParameterList::values
+ %ignore Teuchos::ParameterList::name(ConstIterator) const;
+ %include "Teuchos_ParameterList.hpp"
+ // SWIG thinks that PrintOptions is an un-nested Teuchos class, so we
+-// need to trick the C++ compiler into understanding this so called
++// need to trick the C++ compiler into understanding this so-called
+ // un-nested Teuchos type.
+ %{
+ namespace Teuchos
+@@ -961,3 +967,10 @@ typedef ParameterList::PrintOptions PrintOptions;
+ // Teuchos::ParameterListAcceptor support //
+ ////////////////////////////////////////////
+ %include "Teuchos_ParameterListAcceptor.hpp"
++
++////////////////////////////////////////////
++// Teuchos::ParameterListModifier support //
++////////////////////////////////////////////
++%teuchos_rcp(Teuchos::ParameterListModifier)
++%include "Teuchos_ParameterListModifier.hpp"
++
+diff --git a/packages/PyTrilinos/src/gen_teuchos_rcp.py.in b/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
+index b43cc9f71ee..5337e54890e 100755
+--- a/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
++++ b/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
+@@ -442,14 +442,10 @@ def get_import_directives(teuchos_rcps):
+         if swig_directive not in result:
+             result.append(swig_directive)
+ 
+-    # if (WITH_TPETRA):
+-    #     # Find the Tpetra::Map import
+-    #     index = result.index('%import "Tpetra_Map_decl.hpp"')
+-    #     result.insert(index  , "%ignore Tpetra::Map::Map;")
+-    #     result.insert(index+1, "%ignore Tpetra::Map::getGlobalNumElements;")
+-    #     result.insert(index+2, "%ignore Tpetra::Map::getRemoteIndexList;")
+-    #     result.insert(index+3, "%ignore Tpetra::Map::getMyGlobalIndices;")
+-    #     result.insert(index+5, "%template(Map_default) Tpetra::Map<PYTRILINOS_LOCAL_ORD,PYTRILINOS_GLOBAL_ORD>;")
++    if (WITH_TPETRA):
++        # Find the Tpetra::Map import
++        index = result.index('%import "Tpetra_Map_decl.hpp"')
++        result.insert(index, '%import "TpetraCore_config.h"')
+ 
+     if (WITH_ANASAZI):
+         # Find the first Anasazi import and insert AnasaziTypes.hpp before it
+
+From f9c926f836f8fa7fea90dfcbeb6abf53b847ce4e Mon Sep 17 00:00:00 2001
+From: Pyt Viper <viperpyt@gmail.com>
+Date: Tue, 24 Dec 2019 11:06:31 -0700
+Subject: [PATCH 2/3] PyTrilinos: Update doxy2swig.py.in to handle variadic
+ template arguments
+
+Fixes #6500
+
+doxy2swig.py.in was altered to look for %feature("docstring")
+directives that act on members with variadic template arguments.  SWIG
+thinks these are syntax errors, so I comment out the entire multi-line
+directive.  This prevents the syntax error with the downside that a
+few class members (all in Tpetra right now) won't get automatically
+generated docstrings.
+---
+ .../PyTrilinos/doc/Doxygen/doxy2swig.py.in    | 29 ++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
+
+diff --git a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
+index 09896e8ce21..6e2e8b296b8 100755
+--- a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
++++ b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
+@@ -60,7 +60,7 @@ def my_str(source):
+ class Doxy2SWIG:
+     """
+     Converts Doxygen generated XML files into a file containing
+-    docstrings that can be used by SWIG-1.3.x that have support for
++    docstrings that can be used by SWIG >= 1.3 that have support for
+     feature("docstring").  Once the data is parsed it is stored in
+     self.pieces.
+     """
+@@ -102,6 +102,7 @@ class Doxy2SWIG:
+ 
+         self.space_re = re.compile(r'\s+')
+         self.lead_spc = re.compile(r'^(%feature\S+\s+\S+\s*?)"\s+(\S)')
++        self.variadic = re.compile(r'<.*\.\.\.\s*>', re.DOTALL)
+         self.multi = 0
+         self.ignores = ['inheritancegraph', 'param', 'listofallmembers',
+                         'innerclass', 'name', 'declname', 'incdepgraph',
+@@ -122,6 +123,8 @@ class Doxy2SWIG:
+         data is stored in `self.pieces`.
+         """
+         self.parse(self.xmldoc)
++        for i in range(len(self.pieces)):
++            print("pieces[%d]: '%s'" % (i, self.pieces[i]))
+ 
+     def parse(self, node):
+         """
+@@ -432,6 +435,30 @@ class Doxy2SWIG:
+                 _tmp = textwrap.fill(i.strip(), break_long_words=False)
+                 _tmp = self.lead_spc.sub(r'\1"\2', _tmp)
+                 ret.extend([_tmp, '\n\n'])
++
++        # PytViper: look for pieces that have variadic template arguments
++        # and if found, comment each line of the swig directive
++        i = 0
++        while i < len(ret):
++            piece = ret[i]
++            if piece.startswith('%feature("docstring")'):
++                m = self.variadic.findall(piece)
++                if m:
++                    start = i
++                    while not ret[i].endswith('";'):
++                        i += 1;
++                    end = i+1
++                    for j in range(start, end):
++                        piece = ret[j]
++                        parts = piece.split('\n')
++                        for k in range(len(parts)):
++                            part = parts[k]
++                            if not part.startswith('//'):
++                                parts[k] = '// ' + part
++                        ret[j] = "\n".join(parts)
++            i += 1
++        # PytViper: done
++
+         return ret
+ 
+ 
+
+From a70475153ed0cc6f14315313b1b5a44506615297 Mon Sep 17 00:00:00 2001
+From: Pyt Viper <viperpyt@gmail.com>
+Date: Tue, 24 Dec 2019 11:53:54 -0700
+Subject: [PATCH 3/3] PyTrilinos: Delete debugging commands from
+ doxy2swig.py.in
+
+---
+ packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
+index 6e2e8b296b8..ba7088ecc27 100755
+--- a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
++++ b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
+@@ -123,8 +123,6 @@ class Doxy2SWIG:
+         data is stored in `self.pieces`.
+         """
+         self.parse(self.xmldoc)
+-        for i in range(len(self.pieces)):
+-            print("pieces[%d]: '%s'" % (i, self.pieces[i]))
+ 
+     def parse(self, node):
+         """

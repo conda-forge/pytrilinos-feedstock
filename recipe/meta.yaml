@@ -11,6 +11,8 @@ source:
     # https://github.com/trilinos/Trilinos/pull/6512
     - 6512-osx_B0_defined_patch.patch
     - fixup_syntax_error.patch
+    # https://github.com/trilinos/Trilinos/pull/6501
+    - 6501-doxygen_swig.patch
 
 build:
   number: 0
