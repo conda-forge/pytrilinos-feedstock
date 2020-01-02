@@ -23,11 +23,11 @@ requirements:
   host:
     - {{ mpi }}
     - python
+    - pip
     - swig 3
     - doxygen
     - numpy
     - mpi4py
-
   run:
     - {{ mpi }}
     - mpi4py
