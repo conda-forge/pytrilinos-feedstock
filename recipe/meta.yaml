@@ -1,6 +1,5 @@
 {% set name = "PyTrilinos" %}
 {% set version = "12.18.1" %}
-{% set date_version = "20191023" %}
 {% set sha256 = "ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06" %}
 {% set mpi = 'mpich 3.2.*' %}
 
@@ -10,7 +9,8 @@ package:
 
 source:
   # fn: trilinos-{{ version }}-Source.tar.gz
-  url: https://github.com/trilinos/Trilinos/archive/trilinos-cnars-{{ date_version }}.tar.gz
+  #url: https://github.com/trilinos/Trilinos/archive/trilinos-cnars-{{ date_version }}.tar.gz
+  url: https://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version | replace('.', '-') }}.tar.gz
   # sha256: {{ sha256 }}
   # patches:
   #   - 12.10-fixes.patch
