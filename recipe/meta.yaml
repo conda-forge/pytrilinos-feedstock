@@ -1,8 +1,7 @@
-{% set name = "PyTrilinos" %}
 {% set version = "12.18.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: pytrilinos
   version: {{ version }}
 
 source:
@@ -26,7 +25,9 @@ requirements:
   host:
     - python
     - pip
-    - swig 3
+    # swig 3.0.12 does not parse certain arguments correctly
+    # https://github.com/trilinos/Trilinos/pull/6501#discussion_r361222925
+    - swig 3.0.11
     - doxygen
     - mpich 3.3
     - numpy
