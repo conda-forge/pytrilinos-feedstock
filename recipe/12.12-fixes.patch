@@ -11,14 +11,6 @@ index 9a8e6e556d..f6f5097b94 100644
    
    IF (COMM_TYPE STREQUAL MPI)
      SET(TPL_ENABLE_MPI ON)
-diff --git a/cmake/tribits/doc/developers_guide/TribitsBuildReference.html b/cmake/tribits/doc/developers_guide/TribitsBuildReference.html
-deleted file mode 120000
-index 6ade28bf63..0000000000
---- a/cmake/tribits/doc/developers_guide/TribitsBuildReference.html
-+++ /dev/null
-@@ -1 +0,0 @@
--../build_ref/TribitsBuildReference.html
-\ No newline at end of file
 diff --git a/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt b/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt
 index b9a39e82fc..37dc7c7e38 100644
 --- a/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt
