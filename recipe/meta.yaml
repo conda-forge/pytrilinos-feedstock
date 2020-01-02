@@ -1,7 +1,7 @@
 {% set name = "PyTrilinos" %}
 {% set version = "12.18.1" %}
-{% set sha256 = "ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06" %}
-{% set mpi = 'mpich 3.2.*' %}
+{% set sha256 = "7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf" %}
+{% set mpi = 'mpich 3.3.*' %}
 
 package:
   name: {{ name|lower }}
