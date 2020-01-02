@@ -1,6 +1,5 @@
 {% set name = "PyTrilinos" %}
 {% set version = "12.18.1" %}
-{% set mpi = 'mpich 3.3.*' %}
 
 package:
   name: {{ name|lower }}
@@ -9,6 +8,9 @@ package:
 source:
   url: https://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version | replace('.', '-') }}.tar.gz
   sha256: 7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf
+  patches:
+    # https://github.com/trilinos/Trilinos/pull/6512
+    - 6512-osx_B0_defined_patch.patch
 
 build:
   number: 0
@@ -21,17 +23,17 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - {{ mpi }}
     - python
     - pip
     - swig 3
     - doxygen
+    - mpich 3.3
     - numpy
     - mpi4py
   run:
-    - {{ mpi }}
-    - mpi4py
     - python
+    - mpi4py
+    - mpich 3.3
     - {{ pin_compatible('numpy') }}
 
 test:
