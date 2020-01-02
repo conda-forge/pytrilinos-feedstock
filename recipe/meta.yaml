@@ -31,13 +31,13 @@ requirements:
     # https://github.com/trilinos/Trilinos/pull/6501#discussion_r361222925
     - swig 3.0.11
     - doxygen
-    - mpich 3.3
+    - mpich
     - numpy
     - mpi4py
   run:
     - python
     - mpi4py
-    - mpich 3.3
+    - mpich
     - {{ pin_compatible('numpy') }}
 
 test:
