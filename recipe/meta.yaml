@@ -1,47 +1,48 @@
-{% set name = "PyTrilinos" %}
-{% set version = "12.10.1" %}
-{% set sha256 = "ea8ff573bb1f452f2585950cdabe7e2c84cb35013844c58dc878c66bd4245e06" %}
-{% set mpi = 'mpich 3.2.*' %}
+{% set version = "12.18.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: pytrilinos
   version: {{ version }}
 
 source:
-  fn: trilinos-{{ version }}-Source.tar.gz
-  url: http://trilinos.csbsju.edu/download/files/trilinos-{{ version }}-Source.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version | replace('.', '-') }}.tar.gz
+  sha256: 7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf
   patches:
-    - 12.10-fixes.patch
+    # https://github.com/trilinos/Trilinos/pull/6512
+    - 6512-osx_B0_defined_patch.patch
+    - fixup_syntax_error.patch
+    # https://github.com/trilinos/Trilinos/pull/6501
+    - 6501-doxygen_swig.patch
 
 build:
-  number: 2
-  skip: true  # [win or py3k]
+  number: 0
+  skip: true  # [win]
 
 requirements:
   build:
-    - cmake 3.9.6
+    - cmake 3.10
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - {{ mpi }}
     - python
-    - swig 3.0.10
+    - pip
+    # swig 3.0.12 does not parse certain arguments correctly
+    # https://github.com/trilinos/Trilinos/pull/6501#discussion_r361222925
+    - swig 3.0.11
     - doxygen
+    - mpich
     - numpy
     - mpi4py
-
   run:
-    - {{ mpi }}
-    - mpi4py
     - python
+    - mpi4py
+    - mpich
     - {{ pin_compatible('numpy') }}
 
 test:
   requires:
-    - cmake 3.9.6
-    - mpi4py
+    - cmake
   imports:
     - PyTrilinos.Teuchos
     - PyTrilinos.Epetra
