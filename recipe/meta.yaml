@@ -20,7 +20,7 @@ build:
 
 requirements:
   build:
-    - cmake 3.9.6
+    - cmake 3.10
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
