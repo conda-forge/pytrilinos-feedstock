@@ -40,7 +40,6 @@ cmake \
   -D Trilinos_ENABLE_Domi:BOOL=ON \
   -D Trilinos_ENABLE_Thyra:BOOL=ON \
   -D Trilinos_ENABLE_Xpetra:BOOL=ON \
-  -D Trilinos_ENABLE_OptiPack:BOOL=ON \
   -D Trilinos_ENABLE_Isorropia:BOOL=OFF \
   -D Trilinos_ENABLE_Pliris:BOOL=OFF \
   -D Trilinos_ENABLE_AztecOO:BOOL=ON \

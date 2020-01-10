@@ -1,5 +1,5 @@
 {% set name = "PyTrilinos" %}
-{% set version = "12.12.1" %}
+{% set version = "12.18.1" %}
 
 package:
   name: {{ name | lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: http://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version | replace('.', '-') }}.tar.gz
-  sha256: 5474c5329c6309224a7e1726cf6f0d855025b2042959e4e2be2748bd6bb49e18
+  sha256: 7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf
   patches:
-    - 12.12-fixes.patch
+    - 12.18-fixes.patch
 
 build:
   number: 0
@@ -17,7 +17,7 @@ build:
 
 requirements:
   build:
-    - cmake 3.9.6
+    - cmake>=3.10.0
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -37,7 +37,7 @@ requirements:
 
 test:
   requires:
-    - cmake 3.9.6
+    - cmake>=3.10.0
     - mpi4py
   imports:
     - PyTrilinos.Teuchos
