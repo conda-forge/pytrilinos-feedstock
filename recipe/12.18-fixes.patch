@@ -1,13 +1,13 @@
 diff --git a/packages/PyTrilinos/doc/Doxygen/Doxyfile_Tpetra.in b/packages/PyTrilinos/doc/Doxygen/Doxyfile_Tpetra.in
-index 9b8b1e28d7..d43e0d4e74 100644
+index d43e0d4e74..9b8b1e28d7 100644
 --- a/packages/PyTrilinos/doc/Doxygen/Doxyfile_Tpetra.in
 +++ b/packages/PyTrilinos/doc/Doxygen/Doxyfile_Tpetra.in
 @@ -824,7 +824,7 @@ RECURSIVE              = NO
  # Note that relative paths are relative to the directory from which doxygen is
  # run.
  
--EXCLUDE                = 
-+EXCLUDE                =
+-EXCLUDE                =
++EXCLUDE                = 
  
  # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
  # directories that are symbolic links (a Unix file system feature) are excluded
@@ -15,142 +15,142 @@ index 9b8b1e28d7..d43e0d4e74 100644
  # Note that the wildcards are matched against the file with absolute path, so to
  # exclude all test directories for example use the pattern */test/*
  
--EXCLUDE_PATTERNS       = 
-+EXCLUDE_PATTERNS       =
+-EXCLUDE_PATTERNS       =
++EXCLUDE_PATTERNS       = 
  
  # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
  # (namespaces, classes, functions, etc.) that should be excluded from the
-@@ -851,8 +851,7 @@ EXCLUDE_PATTERNS       =
+@@ -851,7 +851,8 @@ EXCLUDE_PATTERNS       =
  # Note that the wildcards are matched against the file with absolute path, so to
  # exclude all test directories use the pattern */test/*
  
--EXCLUDE_SYMBOLS        = packAndPrepare unpackAndCombine blockCrsMatrixWriter \
--                         copyAndPermute
-+EXCLUDE_SYMBOLS        =
+-EXCLUDE_SYMBOLS        =
++EXCLUDE_SYMBOLS        = packAndPrepare unpackAndCombine blockCrsMatrixWriter \
++                         copyAndPermute
  
  # The EXAMPLE_PATH tag can be used to specify one or more files or directories
  # that contain example code fragments that are included (see the \include
 diff --git a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
-index ba7088ecc2..09896e8ce2 100755
+index 09896e8ce2..ba7088ecc2 100755
 --- a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
 +++ b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
 @@ -60,7 +60,7 @@ def my_str(source):
  class Doxy2SWIG:
      """
      Converts Doxygen generated XML files into a file containing
--    docstrings that can be used by SWIG >= 1.3 that have support for
-+    docstrings that can be used by SWIG-1.3.x that have support for
+-    docstrings that can be used by SWIG-1.3.x that have support for
++    docstrings that can be used by SWIG >= 1.3 that have support for
      feature("docstring").  Once the data is parsed it is stored in
      self.pieces.
      """
-@@ -102,7 +102,6 @@ class Doxy2SWIG:
+@@ -102,6 +102,7 @@ class Doxy2SWIG:
  
          self.space_re = re.compile(r'\s+')
          self.lead_spc = re.compile(r'^(%feature\S+\s+\S+\s*?)"\s+(\S)')
--        self.variadic = re.compile(r'<.*\.\.\.\s*>', re.DOTALL)
++        self.variadic = re.compile(r'<.*\.\.\.\s*>', re.DOTALL)
          self.multi = 0
          self.ignores = ['inheritancegraph', 'param', 'listofallmembers',
                          'innerclass', 'name', 'declname', 'incdepgraph',
-@@ -433,30 +432,6 @@ class Doxy2SWIG:
+@@ -432,6 +433,30 @@ class Doxy2SWIG:
                  _tmp = textwrap.fill(i.strip(), break_long_words=False)
                  _tmp = self.lead_spc.sub(r'\1"\2', _tmp)
                  ret.extend([_tmp, '\n\n'])
--
--        # PytViper: look for pieces that have variadic template arguments
--        # and if found, comment each line of the swig directive
--        i = 0
--        while i < len(ret):
--            piece = ret[i]
--            if piece.startswith('%feature("docstring")'):
--                m = self.variadic.findall(piece)
--                if m:
--                    start = i
--                    while not ret[i].endswith('";'):
--                        i += 1;
--                    end = i+1
--                    for j in range(start, end):
--                        piece = ret[j]
--                        parts = piece.split('\n')
--                        for k in range(len(parts)):
--                            part = parts[k]
--                            if not part.startswith('//'):
--                                parts[k] = '// ' + part
--                        ret[j] = "\n".join(parts)
--            i += 1
--        # PytViper: done
--
++
++        # PytViper: look for pieces that have variadic template arguments
++        # and if found, comment each line of the swig directive
++        i = 0
++        while i < len(ret):
++            piece = ret[i]
++            if piece.startswith('%feature("docstring")'):
++                m = self.variadic.findall(piece)
++                if m:
++                    start = i
++                    while not ret[i].endswith('";'):
++                        i += 1;
++                    end = i+1
++                    for j in range(start, end):
++                        piece = ret[j]
++                        parts = piece.split('\n')
++                        for k in range(len(parts)):
++                            part = parts[k]
++                            if not part.startswith('//'):
++                                parts[k] = '// ' + part
++                        ret[j] = "\n".join(parts)
++            i += 1
++        # PytViper: done
++
          return ret
  
  
 diff --git a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp b/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
-index 4a2f70b4d5..f696215922 100644
+index f696215922..4a2f70b4d5 100644
 --- a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
 +++ b/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
-@@ -78,7 +78,6 @@
+@@ -78,6 +78,7 @@
  #include "Teuchos_ParameterList.hpp"
  #include "Teuchos_ParameterListAcceptor.hpp"
  #include "Teuchos_ParameterListExceptions.hpp"
--#include "Teuchos_ParameterListModifier.hpp"
++#include "Teuchos_ParameterListModifier.hpp"
  #include "Teuchos_RCP.hpp"
  #include "Teuchos_RCPDecl.hpp"
  #include "Teuchos_ReductionOp.hpp"
 diff --git a/packages/PyTrilinos/src/Teuchos_ParameterList.i b/packages/PyTrilinos/src/Teuchos_ParameterList.i
-index de47cfc75b..486b7186b2 100644
+index 486b7186b2..de47cfc75b 100644
 --- a/packages/PyTrilinos/src/Teuchos_ParameterList.i
 +++ b/packages/PyTrilinos/src/Teuchos_ParameterList.i
-@@ -933,12 +933,6 @@ Teuchos::ParameterList::values
+@@ -933,6 +933,12 @@ Teuchos::ParameterList::values
    }
  }    // %extend ParameterList
  
--%{
--  using Teuchos::Array;
--  using Teuchos::null;
--  using Teuchos::ParameterListModifier;
--%}
--
++%{
++  using Teuchos::Array;
++  using Teuchos::null;
++  using Teuchos::ParameterListModifier;
++%}
++
  %ignore Teuchos::ParameterList::set;
  %ignore Teuchos::ParameterList::setEntry;
  %ignore Teuchos::ParameterList::get;
-@@ -954,7 +948,7 @@ Teuchos::ParameterList::values
+@@ -948,7 +954,7 @@ Teuchos::ParameterList::values
  %ignore Teuchos::ParameterList::name(ConstIterator) const;
  %include "Teuchos_ParameterList.hpp"
  // SWIG thinks that PrintOptions is an un-nested Teuchos class, so we
--// need to trick the C++ compiler into understanding this so-called
-+// need to trick the C++ compiler into understanding this so called
+-// need to trick the C++ compiler into understanding this so called
++// need to trick the C++ compiler into understanding this so-called
  // un-nested Teuchos type.
  %{
  namespace Teuchos
-@@ -967,10 +961,3 @@ typedef ParameterList::PrintOptions PrintOptions;
+@@ -961,3 +967,10 @@ typedef ParameterList::PrintOptions PrintOptions;
  // Teuchos::ParameterListAcceptor support //
  ////////////////////////////////////////////
  %include "Teuchos_ParameterListAcceptor.hpp"
--
--////////////////////////////////////////////
--// Teuchos::ParameterListModifier support //
--////////////////////////////////////////////
--%teuchos_rcp(Teuchos::ParameterListModifier)
--%include "Teuchos_ParameterListModifier.hpp"
--
++
++////////////////////////////////////////////
++// Teuchos::ParameterListModifier support //
++////////////////////////////////////////////
++%teuchos_rcp(Teuchos::ParameterListModifier)
++%include "Teuchos_ParameterListModifier.hpp"
++
 diff --git a/packages/PyTrilinos/src/gen_teuchos_rcp.py.in b/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
-index 5337e54890..b43cc9f71e 100755
+index b43cc9f71e..5337e54890 100755
 --- a/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
 +++ b/packages/PyTrilinos/src/gen_teuchos_rcp.py.in
-@@ -442,10 +442,14 @@ def get_import_directives(teuchos_rcps):
+@@ -442,14 +442,10 @@ def get_import_directives(teuchos_rcps):
          if swig_directive not in result:
              result.append(swig_directive)
  
--    if (WITH_TPETRA):
--        # Find the Tpetra::Map import
--        index = result.index('%import "Tpetra_Map_decl.hpp"')
--        result.insert(index, '%import "TpetraCore_config.h"')
-+    # if (WITH_TPETRA):
-+    #     # Find the Tpetra::Map import
-+    #     index = result.index('%import "Tpetra_Map_decl.hpp"')
-+    #     result.insert(index  , "%ignore Tpetra::Map::Map;")
-+    #     result.insert(index+1, "%ignore Tpetra::Map::getGlobalNumElements;")
-+    #     result.insert(index+2, "%ignore Tpetra::Map::getRemoteIndexList;")
-+    #     result.insert(index+3, "%ignore Tpetra::Map::getMyGlobalIndices;")
-+    #     result.insert(index+5, "%template(Map_default) Tpetra::Map<PYTRILINOS_LOCAL_ORD,PYTRILINOS_GLOBAL_ORD>;")
+-    # if (WITH_TPETRA):
+-    #     # Find the Tpetra::Map import
+-    #     index = result.index('%import "Tpetra_Map_decl.hpp"')
+-    #     result.insert(index  , "%ignore Tpetra::Map::Map;")
+-    #     result.insert(index+1, "%ignore Tpetra::Map::getGlobalNumElements;")
+-    #     result.insert(index+2, "%ignore Tpetra::Map::getRemoteIndexList;")
+-    #     result.insert(index+3, "%ignore Tpetra::Map::getMyGlobalIndices;")
+-    #     result.insert(index+5, "%template(Map_default) Tpetra::Map<PYTRILINOS_LOCAL_ORD,PYTRILINOS_GLOBAL_ORD>;")
++    if (WITH_TPETRA):
++        # Find the Tpetra::Map import
++        index = result.index('%import "Tpetra_Map_decl.hpp"')
++        result.insert(index, '%import "TpetraCore_config.h"')
  
      if (WITH_ANASAZI):
          # Find the first Anasazi import and insert AnasaziTypes.hpp before it
