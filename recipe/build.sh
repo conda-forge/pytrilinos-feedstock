@@ -10,6 +10,14 @@ export OMPI_MCA_plm=isolated
 export OMPI_MCA_btl_vader_single_copy_mechanism=none
 export OMPI_MCA_rmaps_base_oversubscribe=yes
 
+echo "Listing of packages directory"
+ls packages
+echo "Listing of packages/PyTrilinos directory"
+ls packages/PyTrilinos
+echo "Listing of packages/PyTrilinos/doc directory"
+ls packages/PyTrilinos/doc
+echo "Listing of packages/PyTrilinos/doc/Doxygen directory"
+ls packages/PyTrilinos/doc/Doxygen
 echo "First line of docstrings.py:"
 head -1 packages/PyTrilinos/doc/Doxygen/docstrings.py
 echo "First line of doxy2swig.py:"
