@@ -30,6 +30,27 @@ index d43e0d4e74..9b8b1e28d7 100644
  
  # The EXAMPLE_PATH tag can be used to specify one or more files or directories
  # that contain example code fragments that are included (see the \include
+diff --git a/packages/PyTrilinos/doc/Doxygen/docstrings.py.in b/packages/PyTrilinos/doc/Doxygen/docstrings.py.in
+index c0a537af9b..8aba4e4882 100755
+--- a/packages/PyTrilinos/doc/Doxygen/docstrings.py.in
++++ b/packages/PyTrilinos/doc/Doxygen/docstrings.py.in
+@@ -47,6 +47,7 @@ def create_docstrings(package,
+     # Run doxy2swig.py on the appropriate index.xml file
+ 
+     # Get the doxy2swig script, source filename, and output filename
++    python     = sys.executable
+     source_dir = os.path.split(__file__)[0]
+     doxy2swig  = os.path.join(source_dir,"doxy2swig.py")
+     doxy2swig  = os.path.abspath(doxy2swig)
+@@ -63,7 +64,7 @@ def create_docstrings(package,
+     sys.stdout.flush()
+ 
+     # Run and wait for completion
+-    result = subprocess.call([doxy2swig, source, output],
++    result = subprocess.call([python, doxy2swig, source, output],
+                              stdout=out_file,
+                              stderr=err_file)
+ 
 diff --git a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in b/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
 index 09896e8ce2..ba7088ecc2 100755
 --- a/packages/PyTrilinos/doc/Doxygen/doxy2swig.py.in
