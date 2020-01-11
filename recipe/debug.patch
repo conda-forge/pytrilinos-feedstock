@@ -1,0 +1,18 @@
+diff --git a/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt b/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt
+index 37dc7c7e..97eaf200 100644
+--- a/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt
++++ b/packages/PyTrilinos/doc/Doxygen/CMakeLists.txt
+@@ -51,6 +51,13 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doxy2swig.py.in
+ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/makedeps.py.in
+   ${CMAKE_CURRENT_BINARY_DIR}/makedeps.py)
+ 
++MESSAGE(STATUS "First line of docstrings.py")
++EXECUTE_PROCESS(COMMAND head docstrings.py
++  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
++MESSAGE(STATUS "First line of doxy2swig.py")
++EXECUTE_PROCESS(COMMAND head doxy2swig.py
++  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
++
+ FOREACH(Package ${PyTrilinos_PACKAGES})
+ 
+   IF(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/${Package}_dox.i)
