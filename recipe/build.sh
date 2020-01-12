@@ -81,5 +81,8 @@ cmake \
 make -j $CPU_COUNT
 
 # ctest --output-on-failure
+cd packages/PyTrilinos/src
+ls -R PyTrilinos
+cd ../../..
 
 make install
