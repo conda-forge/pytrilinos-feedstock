@@ -81,8 +81,9 @@ cmake \
 make -j $CPU_COUNT
 
 # ctest --output-on-failure
-cd packages/PyTrilinos/src
-ls -R PyTrilinos
-cd ../../..
 
 make install
+
+echo "Listing installed package:"
+ls $PREFIX/lib/python2.7/site-packages
+ls -R $PREFIX/lib/python2.7/site-packages/PyTrilinos
