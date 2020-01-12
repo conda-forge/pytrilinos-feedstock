@@ -103,6 +103,136 @@ index 09896e8ce2..ba7088ecc2 100755
          return ret
  
  
+diff --git a/packages/PyTrilinos/src/PyTrilinos/Isorropia/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/Isorropia/CMakeLists.txt
+index 437e70566d..a06fb4c0b4 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/Isorropia/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/Isorropia/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/Isorropia)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/LOCA/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/LOCA/CMakeLists.txt
+index a45d6c5b19..5d119713bb 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/LOCA/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/LOCA/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/LOCA)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/LOCA/Epetra/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/LOCA/Epetra/CMakeLists.txt
+index fd06d3f116..221043450b 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/LOCA/Epetra/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/LOCA/Epetra/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/LOCA/Epetra)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/LOCA/Hopf/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/LOCA/Hopf/CMakeLists.txt
+index e6ed2b088d..13d2e61841 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/LOCA/Hopf/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/LOCA/Hopf/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/LOCA/Hopf)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/LOCA/Pitchfork/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/LOCA/Pitchfork/CMakeLists.txt
+index 7222334235..ae010fc45c 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/LOCA/Pitchfork/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/LOCA/Pitchfork/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/LOCA/Pitchfork)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/LOCA/TurningPoint/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/LOCA/TurningPoint/CMakeLists.txt
+index 447e38d018..e202135707 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/LOCA/TurningPoint/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/LOCA/TurningPoint/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/LOCA/TurningPoint)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/NOX/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/NOX/CMakeLists.txt
+index 3f7491a8dc..d7004ed6ae 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/NOX/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/NOX/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/NOX)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/NOX/Epetra/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/NOX/Epetra/CMakeLists.txt
+index d620f44de9..93c5211c91 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/NOX/Epetra/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/NOX/Epetra/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/NOX/Epetra)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/NOX/PETSc/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/NOX/PETSc/CMakeLists.txt
+index 91302ec6fd..f9632d20df 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/NOX/PETSc/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/NOX/PETSc/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/NOX/PETSc)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
+diff --git a/packages/PyTrilinos/src/PyTrilinos/Teuchos/CMakeLists.txt b/packages/PyTrilinos/src/PyTrilinos/Teuchos/CMakeLists.txt
+index e5e30a7c39..05a0308af4 100644
+--- a/packages/PyTrilinos/src/PyTrilinos/Teuchos/CMakeLists.txt
++++ b/packages/PyTrilinos/src/PyTrilinos/Teuchos/CMakeLists.txt
+@@ -65,7 +65,7 @@ FOREACH(MODULE ${LOCAL_MODULES})
+   INSTALL(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.py
+     ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}.pyc
+-    DESTINATION ${PyTrilinos_INSTALL_DIR})
++    DESTINATION ${PyTrilinos_INSTALL_DIR}/Teuchos)
+   LIST(APPEND ADDITIONAL_CLEAN_FILES ${MODULE}.pyc)
+   
+ ENDFOREACH(MODULE ${LOCAL_MODULES})
 diff --git a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp b/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
 index f696215922..4a2f70b4d5 100644
 --- a/packages/PyTrilinos/src/PyTrilinos_Teuchos_Headers.hpp
