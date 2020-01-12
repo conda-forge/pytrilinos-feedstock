@@ -1,0 +1,15 @@
+diff --git a/packages/PyTrilinos/CMakeLists.txt b/packages/PyTrilinos/CMakeLists.txt
+index 52dc96c4..a4cf78aa 100644
+--- a/packages/PyTrilinos/CMakeLists.txt
++++ b/packages/PyTrilinos/CMakeLists.txt
+@@ -299,3 +299,10 @@ TRIBITS_EXCLUDE_AUTOTOOLS_FILES()
+ 
+ # Execute the package postprocessing
+ TRIBITS_PACKAGE_POSTPROCESS()
++
++MESSAGE(STATUS "Listing of directory packages/PyTrilinos/src/PyTrilinos")
++EXECUTE_PROCESS(COMMAND ls
++                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/src/PyTrilinos)
++MESSAGE(STATUS "Listing of directory packages/PyTrilinos/src/PyTrilinos/Teuchos")
++EXECUTE_PROCESS(COMMAND ls
++                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/src/PyTrilinos/Teuchos)

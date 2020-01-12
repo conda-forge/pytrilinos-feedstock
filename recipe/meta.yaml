@@ -10,10 +10,11 @@ source:
   sha256: 7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf
   patches:
     - 12.18-fixes.patch
+    - debug.patch
 
 build:
   number: 0
-  skip: True  # [ win or osx ]
+  skip: True  # [ win or osx or py3 ]
 
 requirements:
   build:
@@ -41,18 +42,6 @@ test:
     - mpi4py
   imports:
     - PyTrilinos.Teuchos
-    - PyTrilinos.Epetra
-    - PyTrilinos.TriUtils
-    - PyTrilinos.Tpetra
-    - PyTrilinos.EpetraExt
-    - PyTrilinos.Domi
-    - PyTrilinos.AztecOO
-    - PyTrilinos.Galeri
-    - PyTrilinos.Amesos
-    - PyTrilinos.IFPACK
-    - PyTrilinos.Komplex
-    - PyTrilinos.ML
-    - PyTrilinos.Anasazi
 
 about:
   home: https://trilinos.github.io
