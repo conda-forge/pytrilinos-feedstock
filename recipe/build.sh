@@ -27,51 +27,51 @@ cmake \
   -D Trilinos_ENABLE_TESTS:BOOL=OFF \
   -D Trilinos_ENABLE_EXAMPLES:BOOL=OFF \
   -D Trilinos_ENABLE_Teuchos:BOOL=ON \
-  -D Trilinos_ENABLE_RTOp:BOOL=OFF \
-  -D Trilinos_ENABLE_Sacado:BOOL=OFF \
-  -D Trilinos_ENABLE_MiniTensor:BOOL=OFF \
-  -D Trilinos_ENABLE_Epetra:BOOL=OFF \
-  -D Trilinos_ENABLE_Zoltan:BOOL=OFF \
-  -D Trilinos_ENABLE_Shards:BOOL=OFF \
-  -D Trilinos_ENABLE_GlobiPack:BOOL=OFF \
-  -D Trilinos_ENABLE_Triutils:BOOL=OFF \
-  -D Trilinos_ENABLE_Tpetra:BOOL=OFF \
-  -D Trilinos_ENABLE_EpetraExt:BOOL=OFF \
-  -D Trilinos_ENABLE_Domi:BOOL=OFF \
-  -D Trilinos_ENABLE_Thyra:BOOL=OFF \
-  -D Trilinos_ENABLE_Xpetra:BOOL=OFF \
-  -D Trilinos_ENABLE_Isorropia:BOOL=OFF \
-  -D Trilinos_ENABLE_Pliris:BOOL=OFF \
-  -D Trilinos_ENABLE_AztecOO:BOOL=OFF \
-  -D Trilinos_ENABLE_Galeri:BOOL=OFF \
-  -D Trilinos_ENABLE_Amesos:BOOL=OFF \
-  -D Trilinos_ENABLE_Pamgen:BOOL=OFF \
-  -D Trilinos_ENABLE_Zoltan2:BOOL=OFF \
-  -D Trilinos_ENABLE_Ifpack:BOOL=OFF \
-  -D Trilinos_ENABLE_Komplex:BOOL=OFF \
-  -D Trilinos_ENABLE_ML:BOOL=OFF \
-  -D Trilinos_ENABLE_Belos:BOOL=OFF \
-  -D Trilinos_ENABLE_ShyLU:BOOL=OFF \
-  -D Trilinos_ENABLE_Amesos2:BOOL=OFF \
-  -D Trilinos_ENABLE_Komplex:BOOL=OFF \
-  -D Trilinos_ENABLE_Anasazi:BOOL=OFF \
-  -D Trilinos_ENABLE_Ifpack2:BOOL=OFF \
+  -D Trilinos_ENABLE_RTOp:BOOL=ON \
+  -D Trilinos_ENABLE_Sacado:BOOL=ON \
+  -D Trilinos_ENABLE_MiniTensor:BOOL=ON \
+  -D Trilinos_ENABLE_Epetra:BOOL=ON \
+  -D Trilinos_ENABLE_Zoltan:BOOL=ON \
+  -D Trilinos_ENABLE_Shards:BOOL=ON \
+  -D Trilinos_ENABLE_GlobiPack:BOOL=ON \
+  -D Trilinos_ENABLE_Triutils:BOOL=ON \
+  -D Trilinos_ENABLE_Tpetra:BOOL=ON \
+  -D Trilinos_ENABLE_EpetraExt:BOOL=ON \
+  -D Trilinos_ENABLE_Domi:BOOL=ON \
+  -D Trilinos_ENABLE_Thyra:BOOL=ON \
+  -D Trilinos_ENABLE_Xpetra:BOOL=ON \
+  -D Trilinos_ENABLE_Isorropia:BOOL=ON \
+  -D Trilinos_ENABLE_Pliris:BOOL=ON \
+  -D Trilinos_ENABLE_AztecOO:BOOL=ON \
+  -D Trilinos_ENABLE_Galeri:BOOL=ON \
+  -D Trilinos_ENABLE_Amesos:BOOL=ON \
+  -D Trilinos_ENABLE_Pamgen:BOOL=ON \
+  -D Trilinos_ENABLE_Zoltan2:BOOL=ON \
+  -D Trilinos_ENABLE_Ifpack:BOOL=ON \
+  -D Trilinos_ENABLE_Komplex:BOOL=ON \
+  -D Trilinos_ENABLE_ML:BOOL=ON \
+  -D Trilinos_ENABLE_Belos:BOOL=ON \
+  -D Trilinos_ENABLE_ShyLU:BOOL=ON \
+  -D Trilinos_ENABLE_Amesos2:BOOL=ON \
+  -D Trilinos_ENABLE_Komplex:BOOL=ON \
+  -D Trilinos_ENABLE_Anasazi:BOOL=ON \
+  -D Trilinos_ENABLE_Ifpack2:BOOL=ON \
   -D Ifpack2_ENABLE_TEST:BOOL=OFF \
-  -D Trilinos_ENABLE_Stratimikos:BOOL=OFF \
-  -D Trilinos_ENABLE_FEI:BOOL=OFF \
-  -D Trilinos_ENABLE_Teko:BOOL=OFF \
-  -D Trilinos_ENABLE_Intrepid:BOOL=OFF \
+  -D Trilinos_ENABLE_Stratimikos:BOOL=ON \
+  -D Trilinos_ENABLE_FEI:BOOL=ON \
+  -D Trilinos_ENABLE_Teko:BOOL=ON \
+  -D Trilinos_ENABLE_Intrepid:BOOL=ON \
   -D Trilinos_ENABLE_STK:BOOL=OFF \
-  -D Trilinos_ENABLE_Phalanx:BOOL=OFF \
-  -D Trilinos_ENABLE_NOX:BOOL=OFF \
-  -D NOX_ENABLE_LOCA:BOOL=OFF \
-  -D Trilinos_ENABLE_MueLu:BOOL=OFF \
-  -D Trilinos_ENABLE_Rythmos:BOOL=OFF \
-  -D Trilinos_ENABLE_Stokhos:BOOL=OFF \
-  -D Trilinos_ENABLE_ROL:BOOL=OFF \
-  -D Trilinos_ENABLE_Piro:BOOL=OFF \
-  -D Trilinos_ENABLE_TrilinosCouplings:BOOL=OFF \
-  -D Trilinos_ENABLE_Pike:BOOL=OFF \
+  -D Trilinos_ENABLE_Phalanx:BOOL=ON \
+  -D Trilinos_ENABLE_NOX:BOOL=ON \
+  -D NOX_ENABLE_LOCA:BOOL=ON \
+  -D Trilinos_ENABLE_MueLu:BOOL=ON \
+  -D Trilinos_ENABLE_Rythmos:BOOL=ON \
+  -D Trilinos_ENABLE_Stokhos:BOOL=ON \
+  -D Trilinos_ENABLE_ROL:BOOL=ON \
+  -D Trilinos_ENABLE_Piro:BOOL=ON \
+  -D Trilinos_ENABLE_TrilinosCouplings:BOOL=ON \
+  -D Trilinos_ENABLE_Pike:BOOL=ON \
   -D Trilinos_ENABLE_PyTrilinos:BOOL=ON \
   -D PyTrilinos_ENABLE_TESTS:BOOL=ON \
   -D PyTrilinos_ENABLE_EXAMPLES:BOOL=ON \
@@ -80,10 +80,4 @@ cmake \
 
 make -j $CPU_COUNT
 
-# ctest --output-on-failure
-
 make install
-
-echo "Listing installed package:"
-ls $PREFIX/lib/python2.7/site-packages
-ls -R $PREFIX/lib/python2.7/site-packages/PyTrilinos

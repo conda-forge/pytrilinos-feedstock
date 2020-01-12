@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [ win or osx or py3k ]
+  skip: True  # [ win ]
 
 requirements:
   build:
@@ -41,6 +41,18 @@ test:
     - mpi4py
   imports:
     - PyTrilinos.Teuchos
+    - PyTrilinos.Epetra
+    - PyTrilinos.TriUtils
+    - PyTrilinos.Tpetra
+    - PyTrilinos.EpetraExt
+    - PyTrilinos.Domi
+    - PyTrilinos.AztecOO
+    - PyTrilinos.Galeri
+    - PyTrilinos.Amesos
+    - PyTrilinos.IFPACK
+    - PyTrilinos.Komplex
+    - PyTrilinos.ML
+    - PyTrilinos.Anasazi
 
 about:
   home: https://trilinos.github.io
