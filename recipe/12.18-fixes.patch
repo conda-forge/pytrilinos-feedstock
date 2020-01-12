@@ -336,3 +336,33 @@ index 618ab2283c..9e984c5055 100644
            ${CMAKE_CURRENT_SOURCE_DIR}/testutil.py.in
  	  ${CMAKE_CURRENT_BINARY_DIR}/testutil.py
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/testutil.py.in)
+diff --git a/packages/kokkos-kernels/src/blas/KokkosBlas3_gemm.hpp b/packages/kokkos-kernels/src/blas/KokkosBlas3_gemm.hpp
+index 253951a480..d153c755af 100644
+--- a/packages/kokkos-kernels/src/blas/KokkosBlas3_gemm.hpp
++++ b/packages/kokkos-kernels/src/blas/KokkosBlas3_gemm.hpp
+@@ -115,16 +115,16 @@ gemm (const char transA[],
+   // Check compatibility of dimensions at run time.
+   bool A_t = !(transA[0] == 'N' || transA[0] == 'n');
+   bool B_t = !(transB[0] == 'N' || transB[0] == 'n');
+-  int64_t A0 = A.extent(0);
+-  int64_t A1 = A.extent(1);
+-  int64_t B0 = B.extent(0);
+-  int64_t B1 = B.extent(1);
+-  int64_t C0 = C.extent(0);
+-  int64_t C1 = C.extent(1);
++  int64_t A_0 = A.extent(0);
++  int64_t A_1 = A.extent(1);
++  int64_t B_0 = B.extent(0);
++  int64_t B_1 = B.extent(1);
++  int64_t C_0 = C.extent(0);
++  int64_t C_1 = C.extent(1);
+ 
+-  if ( ((A_t?A1:A0) != C0) ||
+-       ((B_t?B0:B1) != C1) ||
+-       ((A_t?A0:A1) != (B_t?B1:B0)) ) {
++  if ( ((A_t?A_1:A_0) != C_0) ||
++       ((B_t?B_0:B_1) != C_1) ||
++       ((A_t?A_0:A_1) != (B_t?B_1:B_0)) ) {
+       std::ostringstream os;
+       os << "KokkosBlas::gemm: Dimensions of A, B, and C do not match: "
+          << "transA: " << transA[0] << " transB: " << transB[0]
