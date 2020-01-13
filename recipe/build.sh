@@ -26,7 +26,6 @@ cmake \
   -D Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF \
   -D Trilinos_ENABLE_TESTS:BOOL=OFF \
   -D Trilinos_ENABLE_EXAMPLES:BOOL=OFF \
-  -D KokkosKernels_ENABLE_DEBUG:BOOL=OFF \
   -D Trilinos_ENABLE_Teuchos:BOOL=ON \
   -D Trilinos_ENABLE_RTOp:BOOL=ON \
   -D Trilinos_ENABLE_Sacado:BOOL=ON \
