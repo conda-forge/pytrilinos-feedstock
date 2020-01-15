@@ -28,12 +28,13 @@ requirements:
     - doxygen
     - numpy
     - mpi4py
-
   run:
     - mpi
     - mpi4py
     - python
     - {{ pin_compatible('numpy') }}
+  run_constrained:
+    - trilinos ==999999999
 
 test:
   requires:
