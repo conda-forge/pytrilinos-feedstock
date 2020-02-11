@@ -29,14 +29,12 @@ requirements:
     - numpy
     - mpi4py
     - scikit-umfpack
-    - superlu
   run:
     - mpi
-    - mpi4py
     - python
+    - mpi4py
     - {{ pin_compatible('numpy') }}
     - scikit-umfpack
-    - superlu
   run_constrained:
     - trilinos ==999999999
 
