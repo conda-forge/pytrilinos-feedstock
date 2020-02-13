@@ -12,7 +12,7 @@ source:
     - 12.18-fixes.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [ win ]
 
 requirements:
@@ -28,11 +28,13 @@ requirements:
     - doxygen
     - numpy
     - mpi4py
+    - scikit-umfpack
   run:
     - mpi
-    - mpi4py
     - python
+    - mpi4py
     - {{ pin_compatible('numpy') }}
+    - scikit-umfpack
   run_constrained:
     - trilinos ==999999999
 
