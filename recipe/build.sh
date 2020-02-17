@@ -2,7 +2,13 @@ mkdir -p build
 cd build
 
 if [ $(uname) == Darwin ]; then
-    export CXXFLAGS="-stdlib=libc++"
+    export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
+fi
+
+export MPI_FLAGS="--allow-run-as-root"
+
+if [ $(uname) == Linux ]; then
+    export MPI_FLAGS="$MPI_FLAGS;-mca;plm;isolated"
 fi
 
 export HYDRA_LAUNCHER=fork
@@ -17,7 +23,6 @@ cmake \
   -D TPL_ENABLE_MPI:BOOL=ON \
   -D MPI_BASE_DIR:PATH=$PREFIX \
   -D MPI_EXEC:FILEPATH=$PREFIX/bin/mpiexec \
-  -D MPI_EXEC_PRE_NUMPROCS_FLAGS:STRING="$MPI_FLAGS" \
   -D PYTHON_EXECUTABLE:FILEPATH=$PYTHON \
   -D SWIG_EXECUTABLE:FILEPATH=$PREFIX/bin/swig \
   -D DOXYGEN_EXECUTABLE:FILEPATH=$PREFIX/bin/doxygen \
@@ -49,11 +54,12 @@ cmake \
   -D Trilinos_ENABLE_Pamgen:BOOL=ON \
   -D Trilinos_ENABLE_Zoltan2:BOOL=ON \
   -D Trilinos_ENABLE_Ifpack:BOOL=ON \
-  -D Trilinos_ENABLE_Komplex:BOOL=ON \
   -D Trilinos_ENABLE_ML:BOOL=ON \
   -D Trilinos_ENABLE_Belos:BOOL=ON \
   -D Trilinos_ENABLE_ShyLU:BOOL=ON \
   -D Trilinos_ENABLE_Amesos2:BOOL=ON \
+  -D Trilinos_ENABLE_SEACAS:BOOL=ON \
+  -D TPL_ENABLE_HDF5:BOOL=ON \
   -D Trilinos_ENABLE_Komplex:BOOL=ON \
   -D Trilinos_ENABLE_Anasazi:BOOL=ON \
   -D Trilinos_ENABLE_Ifpack2:BOOL=ON \
@@ -79,6 +85,4 @@ cmake \
   -D PyTrilinos_INSTALL_PREFIX:PATH=$PREFIX \
   $SRC_DIR
 
-make -j $CPU_COUNT
-
-make install
+make -j $CPU_COUNT install
