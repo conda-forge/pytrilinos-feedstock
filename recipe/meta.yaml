@@ -21,24 +21,25 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - python
-    - numpy
     - libblas
     - liblapack
-    - scikit-umfpack
+    - mpi
     - boost-cpp
-    - {{ mpi }}
-    - hdf5 * mpi_{{ mpi }}_*
-    - netcdf-cxx4 * mpi_{{ mpi }}_*
-    - mpi4py
-    - swig 3.0.11
-    - doxygen
-  run:
-    - {{ mpi }}    # [unix]
-    - python
-    - mpi4py
-    - {{ pin_compatible('numpy') }}
     - scikit-umfpack
+    - netcdf-cxx4 * mpi_{{ mpi }}_*
+    - libmatio
+    - xorg-libx11
+    - hdf5 * mpi_{{ mpi }}_*
+    - python
+    - numpy
+    - mpi4py
+  run:
+    - mpi
+    - boost-cpp
+    - scikit-umfpack
+    - python
+    - {{ pin_compatible('numpy') }}
+    - mpi4py
   run_constrained:
     - trilinos ==999999999
 
