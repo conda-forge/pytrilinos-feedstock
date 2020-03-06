@@ -23,7 +23,7 @@ requirements:
   host:
     - libblas
     - liblapack
-    - mpi
+    - {{ mpi }}   # [unix]
     - boost-cpp
     - scikit-umfpack
     - netcdf-cxx4 * mpi_{{ mpi }}_*
@@ -34,7 +34,7 @@ requirements:
     - numpy
     - mpi4py
   run:
-    - mpi
+    - {{ mpi }}   # [unix]
     - boost-cpp
     - scikit-umfpack
     - python
