@@ -12,29 +12,36 @@ source:
     - 12.18-fixes.patch
 
 build:
-  number: 1
+  number: 2
   skip: True  # [ win ]
 
 requirements:
   build:
     - cmake >=3.10.0
-    - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - mpi
+    - libblas
+    - liblapack
+    - {{ mpi }}   # [unix]
+    - boost-cpp
+    - scikit-umfpack
+    - netcdf-cxx4 * mpi_{{ mpi }}_*
+    - libmatio
+    - xorg-libx11
+    - hdf5 * mpi_{{ mpi }}_*
     - python
-    - swig 3.0.11
+    - swig =3.0.12
     - doxygen
     - numpy
     - mpi4py
-    - scikit-umfpack
   run:
-    - mpi
-    - python
-    - mpi4py
-    - {{ pin_compatible('numpy') }}
+    - {{ mpi }}   # [unix]
+    - boost-cpp
     - scikit-umfpack
+    - python
+    - {{ pin_compatible('numpy') }}
+    - mpi4py
   run_constrained:
     - trilinos ==999999999
 

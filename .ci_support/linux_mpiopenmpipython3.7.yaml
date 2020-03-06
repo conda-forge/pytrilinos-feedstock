@@ -1,3 +1,5 @@
+boost_cpp:
+- 1.70.0
 c_compiler:
 - gcc
 c_compiler_version:
@@ -12,15 +14,23 @@ cxx_compiler_version:
 - '7'
 docker_image:
 - condaforge/linux-anvil-comp7
-fortran_compiler:
-- gfortran
-fortran_compiler_version:
-- '7'
+libblas:
+- 3.8 *netlib
+liblapack:
+- 3.8.0 *netlib
+libmatio:
+- '1.5'
+mpi:
+- openmpi
 numpy:
 - '1.14'
 pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
+  libmatio:
+    max_pin: x.x
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.6'
+- '3.7'
