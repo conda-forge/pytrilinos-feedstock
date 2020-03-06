@@ -20,6 +20,8 @@ liblapack:
 - 3.8.0 *netlib
 libmatio:
 - '1.5'
+mpi:
+- openmpi
 numpy:
 - '1.14'
 pin_run_as_build:
