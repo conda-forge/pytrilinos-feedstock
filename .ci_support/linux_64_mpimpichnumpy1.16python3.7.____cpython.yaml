@@ -1,5 +1,5 @@
 boost_cpp:
-- '1.72'
+- 1.72.0
 c_compiler:
 - gcc
 c_compiler_version:
@@ -23,7 +23,7 @@ libmatio:
 mpi:
 - mpich
 numpy:
-- '1.14'
+- '1.16'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -34,3 +34,10 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.7.* *_cpython
+target_platform:
+- linux-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
+- - python
+  - numpy
