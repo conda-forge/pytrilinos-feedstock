@@ -23,11 +23,11 @@ libmatio:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpi:
-- mpich
+- openmpi
 mpich:
 - '4'
 numpy:
-- '1.19'
+- '1.20'
 openmpi:
 - '4'
 pin_run_as_build:
