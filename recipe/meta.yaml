@@ -12,7 +12,7 @@ source:
     - 12.18-fixes.patch
 
 build:
-  number: 5
+  number: 6
   skip: True  # [ win ]
 
 requirements:
@@ -24,7 +24,7 @@ requirements:
     - libblas
     - liblapack
     - {{ mpi }}   # [unix]
-    - boost-cpp
+    - libboost-devel
     - scikit-umfpack
     - netcdf-cxx4 * mpi_{{ mpi }}_*
     - libmatio
@@ -37,7 +37,6 @@ requirements:
     - mpi4py
   run:
     - {{ mpi }}   # [unix]
-    - boost-cpp
     - scikit-umfpack
     - python
     - {{ pin_compatible('numpy') }}
