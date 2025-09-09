@@ -1,8 +1,10 @@
 mkdir -p build
 cd build
 
-if [ $(uname) == Darwin ]; then
-    export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
+export CMAKE_GENERATOR="Ninja"
+
+if [[ "${target_platform}" == osx-* ]]; then
+    export CXXFLAGS="${CXXFLAGS} -stdlib=libc++ -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
 export MPI_FLAGS="--allow-run-as-root"
@@ -11,14 +13,15 @@ if [ $(uname) == Linux ]; then
     export MPI_FLAGS="$MPI_FLAGS;-mca;plm;isolated"
 fi
 
-export HYDRA_LAUNCHER=fork
-export OMPI_MCA_plm=isolated
-export OMPI_MCA_btl_vader_single_copy_mechanism=none
-export OMPI_MCA_rmaps_base_oversubscribe=yes
+#export HYDRA_LAUNCHER=fork
+#export OMPI_MCA_plm=isolated
+#export OMPI_MCA_btl_vader_single_copy_mechanism=none
+#export OMPI_MCA_rmaps_base_oversubscribe=yes
 
-cmake \
+cmake -G Ninja \
   -D CMAKE_BUILD_TYPE:STRING=RELEASE \
   -D CMAKE_INSTALL_PREFIX:PATH=$PREFIX \
+  -D CMAKE_PREFIX_PATH:PATH=$PREFIX \
   -D BUILD_SHARED_LIBS:BOOL=ON \
   -D TPL_ENABLE_MPI:BOOL=ON \
   -D MPI_BASE_DIR:PATH=$PREFIX \
@@ -26,6 +29,12 @@ cmake \
   -D PYTHON_EXECUTABLE:FILEPATH=$PYTHON \
   -D SWIG_EXECUTABLE:FILEPATH=$PREFIX/bin/swig \
   -D DOXYGEN_EXECUTABLE:FILEPATH=$PREFIX/bin/doxygen \
+  -D CMAKE_C_FLAGS="-Wno-implicit-function-declaration" \
+  -D TPL_ENABLE_Kokkos:BOOL=ON \
+  -D TPL_ENABLE_KokkosKernels:BOOL=ON \
+  -D Kokkos_DIR:PATH="${PREFIX}/lib/cmake/Kokkos" \
+  -D KokkosKernels_DIR:PATH="${PREFIX}/lib/cmake/KokkosKernels" \
+  -D Trilinos_ENABLE_OpenMP:BOOL=ON \
   -D Trilinos_ENABLE_Fortran:BOOL=OFF \
   -D Trilinos_ENABLE_ALL_PACKAGES:BOOL=OFF \
   -D Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF \
@@ -63,7 +72,7 @@ cmake \
   -D Trilinos_ENABLE_Komplex:BOOL=ON \
   -D Trilinos_ENABLE_Anasazi:BOOL=ON \
   -D Trilinos_ENABLE_Ifpack2:BOOL=ON \
-  -D Ifpack2_ENABLE_TEST:BOOL=OFF \
+  -D Ifpack2_ENABLE_TESTS:BOOL=OFF \
   -D Trilinos_ENABLE_Stratimikos:BOOL=ON \
   -D Trilinos_ENABLE_FEI:BOOL=ON \
   -D Trilinos_ENABLE_Teko:BOOL=ON \
@@ -83,6 +92,9 @@ cmake \
   -D PyTrilinos_ENABLE_TESTS:BOOL=ON \
   -D PyTrilinos_ENABLE_EXAMPLES:BOOL=ON \
   -D PyTrilinos_INSTALL_PREFIX:PATH=$PREFIX \
+  -D Teuchos_ENABLE_COMPLEX:BOOL=ON \
+  -D Trilinos_ENABLE_COMPLEX_DOUBLE:BOOL=ON \
   $SRC_DIR
 
-make -j $CPU_COUNT install
+ninja -j $CPU_COUNT
+ninja install
