@@ -12,13 +12,14 @@ source:
     - 12.18-fixes.patch
 
 build:
-  number: 5
+  number: 6
   skip: True  # [ win ]
 
 requirements:
   build:
     - cmake >=3.10.0
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - libblas
