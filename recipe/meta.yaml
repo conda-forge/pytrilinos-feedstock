@@ -1,5 +1,5 @@
 {% set name = "PyTrilinos" %}
-{% set version = "12.18.1" %}
+{% set version = "14.0.0" %}
 
 package:
   name: {{ name | lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: http://github.com/trilinos/Trilinos/archive/trilinos-release-{{ version | replace('.', '-') }}.tar.gz
-  sha256: 7d2e1a1a3e2d2ce78bb248c63411fed5007c827b87cadee3d13c1a45c09a89cf
+  sha256: 054d2fabdf70fce0dfaeb20eed265bd7894045d3e00c3d1ddb72d1c77c339ca1
   patches:
     - 12.18-fixes.patch
 
 build:
-  number: 5
-  skip: True  # [ win ]
+  number: 0
+  skip: true  # [ win]
 
 requirements:
   build:
@@ -69,12 +69,8 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary:
-    Python interfaces to Sandia's suite of HPC solvers and enabling technologies
-  description:
-    Python interfaces to fast, compiled object-oriented algorithms and
-    enabling technologies that support the solution of large-scale, complex
-    multi-physics engineering and scientific problems.
+  summary: Python interfaces to Sandia's suite of HPC solvers and enabling technologies
+  description: Python interfaces to fast, compiled object-oriented algorithms and enabling technologies that support the solution of large-scale, complex multi-physics engineering and scientific problems.
   dev_url: https://github.com/trilinos/Trilinos
 
 extra:
